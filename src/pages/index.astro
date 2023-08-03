@@ -1,10 +1,20 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
+
+import Recommend from '../components/Recommend.astro';
+import { getNewArrivals, Product } from '../lib/getNewArrivals';
+import { getRecords, Record } from '../lib/getRecords'
+
+const newArrivals = await getNewArrivals();
+const records = await getRecords();
+
 ---
 
 <Layout title="Welcome to Astro.">
 	<main>
+    <h1 class="text-3xl font-bold underline">
+      Hello Astro!
+    </h1>
 		<svg
 			class="astro-a"
 			width="495"
@@ -38,29 +48,62 @@ import Card from '../components/Card.astro';
 			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
       Hoge.
 		</p>
-		<ul role="list" class="link-card-grid">
-			<Card
-				href="https://docs.astro.build/"
-				title="Documentation"
-				body="Learn how Astro works and explore the official API docs."
-			/>
-			<Card
-				href="https://astro.build/integrations/"
-				title="Integrations"
-				body="Supercharge your project with new frameworks and libraries."
-			/>
-			<Card
-				href="https://astro.build/themes/"
-				title="Themes"
-				body="Explore a galaxy of community-built starter themes."
-			/>
-			<Card
-				href="https://astro.build/chat/"
-				title="Community"
-				body="Come say hi to our amazing Discord community. ❤️"
-			/>
-		</ul>
-	</main>
+    <button class="alert">Click Me!</button>
+
+    <!-- New Arrivals -->
+    <div class="bg-white">
+      <div class="mx-auto max-w-2xl py-16 px-4 sm:-24 sm:px-6 lg:max-w-7xl lg:px-8">
+        <h2 class="text-2xl font-bold tracking-tight text-gray-900">
+          New Records
+        </h2>
+        <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-1 lg:grid-cols-1 xl:gap-x-8">
+          {
+            records.user_spot_review_status
+              .map((item:Record)=> (
+                <div class="text-gray-900">
+                  <h3>id: {item.id}</h3>
+                  <p>place: {item.record_google_place_name}</p>
+                  <p>created_at: {item.created_at}</p>
+                  <div class="max-w-[250px]">
+                    <video
+                    src={item.record_content_url}
+                    controls
+                    muted
+                    playsinline
+                    ></video>
+                  </div>
+                </div>
+            ))
+          }
+        </div>
+      <div class="mx-auto max-w-2xl py-16 px-4 sm:-24 sm:px-6 lg:max-w-7xl lg:px-8">
+        <h2 class="text-2xl font-bold tracking-tight text-gray-900">
+          user spot histories
+        </h2>
+        <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+          {
+            newArrivals.data
+              .slice(0,4)
+              .map((item:Product)=> (
+              <Recommend {...item} href={`https://thirosue.github.io/hosting-image2/astro-sample/product/${item.id}/main.jpeg`} />
+            ))
+          }
+        </div>
+    </div>
+
+  </main>
+  <script is:inline>
+    console.log("hoge");
+  </script>
+  <script src="./script.ts"></script>
+  <script>
+    const buttons = document.querySelectorAll('button.alert');
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        alert('👋 Hello from Astro!');
+      });
+    });
+  </script>
 </Layout>
 
 <style>
@@ -121,3 +164,4 @@ import Card from '../components/Card.astro';
 		padding: 0;
 	}
 </style>
+../lib/getRecords
