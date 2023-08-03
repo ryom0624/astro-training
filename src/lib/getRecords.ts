@@ -2,6 +2,7 @@
 export interface Record {
   id: number
   record_google_place_name: string
+  record_menu_name: string
   record_content_url: string
   updated_at: string
   created_at: string

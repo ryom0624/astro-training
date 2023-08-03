@@ -51,18 +51,20 @@ const records = await getRecords();
     <button class="alert">Click Me!</button>
 
     <!-- New Arrivals -->
-    <div class="bg-white">
+    <div class="bg-gray-200">
       <div class="mx-auto max-w-2xl py-16 px-4 sm:-24 sm:px-6 lg:max-w-7xl lg:px-8">
         <h2 class="text-2xl font-bold tracking-tight text-gray-900">
           New Records
         </h2>
         <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-1 lg:grid-cols-1 xl:gap-x-8">
+          <p class="text-gray-900">全 {records.user_spot_review_status.length} 件</p>
           {
-            records.user_spot_review_status
+            records.user_spot_review_status.slice(0,20)
               .map((item:Record)=> (
                 <div class="text-gray-900">
                   <h3>id: {item.id}</h3>
                   <p>place: {item.record_google_place_name}</p>
+                  <p>menu_name: {item.record_menu_name}</p>
                   <p>created_at: {item.created_at}</p>
                   <div class="max-w-[250px]">
                     <video
@@ -164,4 +166,3 @@ const records = await getRecords();
 		padding: 0;
 	}
 </style>
-../lib/getRecords
