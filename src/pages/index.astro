@@ -12,9 +12,6 @@ const records = await getRecords();
 
 <Layout title="Welcome to Astro.">
 	<main>
-    <h1 class="text-3xl font-bold underline">
-      Hello Astro!
-    </h1>
 		<svg
 			class="astro-a"
 			width="495"
@@ -42,20 +39,11 @@ const records = await getRecords();
 				</linearGradient>
 			</defs>
 		</svg>
-		<h1>Welcome to <span class="text-gradient">Astro</span></h1>
-		<p class="instructions">
-			To get started, open the directory <code>src/pages</code> in your project.<br />
-			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
-      Hoge.
-		</p>
-    <button class="alert">Click Me!</button>
+		<h1 class="instructions"><span class="text-gradient">New Records</span></h1>
 
     <!-- New Arrivals -->
     <div class="bg-gray-200">
-      <div class="mx-auto max-w-2xl py-16 px-4 sm:-24 sm:px-6 lg:max-w-7xl lg:px-8">
-        <h2 class="text-2xl font-bold tracking-tight text-gray-900">
-          New Records
-        </h2>
+      <div class="mx-auto max-w-2xl py-8 px-6 lg:max-w-7xl lg:px-8">
         <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-1 lg:grid-cols-1 xl:gap-x-8">
           <p class="text-gray-900">全 {records.user_spot_review_status.length} 件</p>
           {
